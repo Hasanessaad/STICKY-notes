@@ -1,9 +1,6 @@
 package com.example.sticky.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -11,10 +8,15 @@ import lombok.Setter;
 public class Note {
     @Id
     @Getter
-    @Setter
-    private long ID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     @Getter
     @Setter
     @Column(name = "notes")
     private String note;
+    @Getter
+    @Setter
+    @JoinColumn(name = "client_fk_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Client client;
 }

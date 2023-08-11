@@ -1,7 +1,5 @@
 package com.example.sticky.Service;
 
-import com.example.sticky.Controller.NoteController;
-import com.example.sticky.Entity.Client;
 import com.example.sticky.Entity.Note;
 import com.example.sticky.Repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

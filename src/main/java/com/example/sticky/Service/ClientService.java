@@ -1,5 +1,6 @@
 package com.example.sticky.Service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.sticky.Entity.Client;
 import com.example.sticky.Repository.ClientRepository;
@@ -7,9 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
+@Service
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<Client> findByName(String name) {
+        return clientRepository.findByName(name);
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public void cadastrar(@RequestBody final Client client){
@@ -24,7 +33,7 @@ public class ClientService {
 
         final Client brandBanco = this.clientRepository.findById(id).orElse(null);
 
-        Assert.isTrue(brandBanco != null || this.clientRepository.findById(id).equals(client.getID()), "Não foi possivel indenficar o registro no banco");
+        Assert.isTrue(brandBanco != null || this.clientRepository.findById(id).equals(client.getId()), "Não foi possivel indenficar o registro no banco");
 
         Assert.isTrue(client.getName().length() > 2, "O nome está faltando");
 
@@ -33,10 +42,9 @@ public class ClientService {
         this.clientRepository.save(client);
     }
 
-
     @Transactional(rollbackFor = Exception.class)
     public void delete(final Client client){
-        final Client clientBanco = this.clientRepository.findById(client.getID()).orElse(null);
+        final Client clientBanco = this.clientRepository.findById(client.getId()).orElse(null);
 
     }
 

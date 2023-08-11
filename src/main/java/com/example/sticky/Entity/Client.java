@@ -1,12 +1,10 @@
 package com.example.sticky.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +12,8 @@ import java.util.List;
 public class Client {
     @Id
     @Getter
-    @Setter
-    private long ID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Getter
     @Setter
@@ -24,6 +22,6 @@ public class Client {
 
     @Getter
     @Setter
-    @Column(name = "client_notes")
-    private List<Note> stickynotes;
+    @OneToMany(mappedBy = "client")
+    private List<Note> stickynotes = new ArrayList<>();
 }
