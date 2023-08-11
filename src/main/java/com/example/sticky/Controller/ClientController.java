@@ -20,7 +20,7 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/name")
+    @GetMapping("/{name}")
     public ResponseEntity<?> findByName(@RequestParam("name") final String name){
 
         List<Client> cur_client = this.clientRepository.findByName(name);
@@ -56,7 +56,7 @@ public class ClientController {
         }
     }
 
-    @PutMapping("/edit")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<?> edit(@RequestParam("id") final Long id,@RequestBody final Client client){
 
         try{

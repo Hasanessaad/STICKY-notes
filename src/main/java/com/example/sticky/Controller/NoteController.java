@@ -34,7 +34,6 @@ public class NoteController {
     @PostMapping("/add")
     public ResponseEntity<?> cadastrar(@RequestBody final Note note){
         try {
-            this.noteRepository.save(note);
             this.noteService.adding(note);
             return ResponseEntity.ok("Registrado cadastrado com Sucesso");
         }

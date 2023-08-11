@@ -15,10 +15,6 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    @Transactional(rollbackFor = Exception.class)
-    public List<Client> findByName(String name) {
-        return clientRepository.findByName(name);
-    }
 
     @Transactional(rollbackFor = Exception.class)
     public void cadastrar(@RequestBody final Client client){
@@ -45,7 +41,6 @@ public class ClientService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(final Client client){
         final Client clientBanco = this.clientRepository.findById(client.getId()).orElse(null);
-
     }
 
 }
