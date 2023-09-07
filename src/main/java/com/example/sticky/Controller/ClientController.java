@@ -20,6 +20,12 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
+    @GetMapping("/{id}")
+    public Client getById(@PathVariable Long id) {
+        // Retrieve a client by ID from the repository and return it
+        return clientRepository.findById(id).orElse(null); // Handle null case as needed
+    }
+
     @GetMapping("/{name}")
     public ResponseEntity<?> findByName(@RequestParam("name") final String name){
 
@@ -80,4 +86,6 @@ public class ClientController {
 
         return ResponseEntity.ok("Marca deletada com sucesso");
     }
+
+
 }

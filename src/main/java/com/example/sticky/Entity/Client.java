@@ -14,14 +14,18 @@ public class Client {
     @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Getter
     @Setter
     @Column(name = "client_names")
     private String name;
-
     @Getter
     @Setter
     @OneToMany(mappedBy = "client")
     private List<Note> stickynotes = new ArrayList<>();
+    public Client() {
+    }
+    public Client(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
